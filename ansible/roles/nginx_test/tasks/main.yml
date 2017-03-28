@@ -1,0 +1,16 @@
+---
+# tasks file for nginx_test
+
+- name: check that nginx installed and running properly
+  shell: /etc/init.d/nginx status
+  register: nginx_output
+- name: nginx output
+  debug: msg={{nginx_output.stdout}}
+- name: check nginx is the proxy for tomcat
+  uri: url=http://{{nginx_ip}} return_content=yes
+  register: tomcat_webpage
+  delegate_to: 127.0.0.1
+  no_log: yes
+- name: check nginx result
+  debug: msg="Nginx is proxying tomcat"
+  when: "'Congratulations' in tomcat_webpage.content"

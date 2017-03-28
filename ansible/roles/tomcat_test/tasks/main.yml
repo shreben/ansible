@@ -1,0 +1,8 @@
+---
+# tasks file for tomcat_test
+
+- name: check that tomcat installed and running properly
+  shell: /sbin/service tomcat status
+  register: tomcat_output
+- name: tomcat output
+  debug: msg={{tomcat_output.stdout}}

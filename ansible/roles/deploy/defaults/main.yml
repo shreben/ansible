@@ -1,0 +1,7 @@
+---
+# defaults file for deploy
+
+url: 'http://{{nginx_ip}}'
+user: '{{tomcat_user}}'
+password: '{{tomcat_group}}'
+

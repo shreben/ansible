@@ -1,0 +1,6 @@
+---
+# tasks file for java
+
+- name: java {{java_version}} is installed
+  yum: name=java-{{java_version}}-openjdk state=present
+  no_log: yes

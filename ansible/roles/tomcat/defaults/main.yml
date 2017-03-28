@@ -1,0 +1,8 @@
+---
+# defaults file for tomcat
+
+tomcat_user: tomcat_as
+tomcat_group: tomcat_as_group
+tomcat_name: tomcat-8
+tomcat_version: 8.5.9
+tomcat_http_port: 8080

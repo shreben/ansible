@@ -1,0 +1,9 @@
+---
+# tasks file for java_test
+
+- name: check that java installed and running properly
+  shell: java -version
+  register: java_output
+- name: java version
+  debug: msg={{java_output.stderr}}
+

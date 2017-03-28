@@ -1,0 +1,36 @@
+---
+# tasks file for deploy
+
+- name: deploy war to tomcat
+  war:
+    url: '{{url}}'
+    war: '{{war}}'
+    user: '{{user}}'
+    password: '{{password}}'
+  delegate_to: 127.0.0.1
+  register: output
+- name: create dir
+  shell: 'mkdir -p /var/lib/tomcat/webapps'
+- name: get current time
+  shell: date
+  register: currentdate
+- name: add deployment time to file
+  lineinfile:
+    dest: /var/lib/tomcat/webapps/deploy-info.txt
+    regexp: '^Deployment\stime.+'
+    line: 'Deployment time: {{currentdate.stdout}}'
+    create: yes
+- name: add deploy user to file
+  lineinfile:
+    dest: /var/lib/tomcat/webapps/deploy-info.txt
+    regexp: '^Deploy\suser.+'
+    line: 'Deploy user: {{user}}'
+- name: test deployment
+  uri: url={{output.appurl}} return_content=yes
+  register: app_webpage
+  delegate_to: 127.0.0.1
+  no_log: yes
+- name: result of app test
+  debug: msg="Success! App is up and running"
+  when: "'{{currentdate.stdout}}' in app_webpage.content"
+
