@@ -1,0 +1,12 @@
+[dev:vars]
+tomcat_name=tomcat-8
+tomcat_version=8.5.9
+tomcat_home=/opt/tomcat/{{tomcat_version}}
+tomcat_user=tomcat_as
+tomcat_group=tomcat_as_group
+tomcat_ip=127.0.0.1
+tomcat_http_port=8080
+tomcat_url=http://archive.apache.org/dist/tomcat/{{tomcat_name}}/v{{tomcat_version}}/bin/apache-tomcat-{{tomcat_version}}.tar.gz
+java_version=1.8.0
+nginx_ip=192.168.168.168
+nginx_port=80
