@@ -1,0 +1,14 @@
+- name: app test
+  hosts: dev
+  tasks:
+  - name: check current time
+    shell: cat /var/lib/tomcat/webapps/deploy-info.txt | grep "Deployment time"
+    register: currentdate
+  - name: test deployment
+    uri: url=http://192.168.168.168/mnt-exam return_content=yes
+    register: app_webpage
+    delegate_to: 127.0.0.1
+    no_log: yes
+  - name: result of app test
+    debug: msg="Success! App is up and running"
+    when: "'{{currentdate.stdout}}' in app_webpage.content"

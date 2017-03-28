@@ -1,0 +1,8 @@
+- name: app deployment
+  hosts: dev
+  become: yes
+  become_user: root
+  vars:
+    war: '{{artefact}}'
+  roles:
+      - { role: deploy, war: 'mnt-exam.war' }

@@ -1,0 +1,11 @@
+- name: roll out Tomcat stack
+  hosts: dev
+  become: yes
+  become_user: root
+  roles:
+  - java
+  - tomcat
+  - nginx
+  - java_test
+  - tomcat_test
+  - nginx_test
